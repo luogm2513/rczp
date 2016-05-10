@@ -1,0 +1,40 @@
+<div class="clearfix">
+	<div class="bd-base-b clearfix">
+		<div class="pull-left">
+			<h3 class="marg-un-t">我的简历</h3>
+		</div>
+		<div class="pull-right linehigh2">
+			<button class="btn btn-default" data-toggle="modal" data-target="#luoModal1">
+				<span class="paroxicon paroxicon-addmini-on"></span> 新建简历
+			</button>
+
+			<!--*modal*-->
+			<div class="modal fade in" tabindex="-1" role="dialog" id="luoModal1"
+				aria-labelledby="新建简历" aria-describedby="新建简历" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<!--*modal body*-->
+						<div id="pers_resumeAdd" class="modal-body"/>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+<div id="my_resumeList"></div>
+<script src="../js/bootstrap.js"></script>
+<script>
+	$('#luoModal1').modal('hide');
+	$('#luoModal1').on('hidden.bs.modal', function(e) {
+	});
+	$(function() {
+		AjaxLoad('/rczp/resume/getResumeAdd.htm', null, 'pers_resumeAdd', function() {
+		});
+	})
+	$(function() {
+		AjaxLoad('/rczp/resume/getMyResumeList.htm', null, 'my_resumeList', function() {
+		});
+	})
+</script>

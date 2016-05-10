@@ -1,0 +1,61 @@
+<!--*个人基础信息修改页面*-->
+<div class="padd-30-b">
+	<h4 class="marg-un-t">个人基础信息</h4>
+	<form role="form" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-3 control-label">姓名:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.personalProfile.realName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">性别:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">[#if map.personalProfile.gender gt 0]女[#else]男[/#if]</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">出生年月:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.personalProfile.birthday?string("YYYY-MM-dd")}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">婚姻状况:</label>
+			<div class="col-sm-9">
+				<P class="form-control-static">[#if map.personalProfile.marriage gt
+					0]已婚[#else]未婚[/#if]</P>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">户口所在地:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.NAreaName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">现居住城市:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.PAreaName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">详细地址:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.personalProfile.address!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">联系方式:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.personalProfile.mobile!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">邮件地址:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.personalProfile.email!}</p>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,128 @@
+<div class="table-responsive padd-10-t">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>状态</th>
+				<th>类型</th>
+				<th>发送者</th>
+				<th>内容</th>
+				<th>时间</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+		[#list messageList as c] [#assign id=c.message.id/]
+			<tr id="msgList_${c.message.id}">
+				<td id="isViewed_${c.message.id}">
+				[#if c.message.isViewed gt 0]<span class="luoicon-remind"/>已读[#else]<span class="luoicon-remind1"/>未读[/#if]
+				</td>
+				<td>求职者来信</td>
+				<td>${c.personalProfile.realName!}</td>
+				<td>
+				    <div style="width:160px;height:20px;overflow:hidden;" >
+				    <a href="#msgModal_${c.message.id}" onclick="viewMessage('${c.message.id}','${c.message.isViewed}')" data-toggle="modal">${c.message.content}</a></div>
+				</td>
+				<td>${c.message.leaveTime!}</td>
+				<td>
+				<a href="#msgModal_${c.message.id}" onclick="viewMessage('${c.message.id}','${c.message.isViewed}')" data-toggle="modal">
+				    <span class="luoicon-check" title="查看"></span>
+				</a>
+				<a href="#leaveMsgModal_${c.message.id}" data-toggle="modal">
+				    <span class="luoicon-message" title="回复留言"></span>
+				</a>
+				<a onclick="delMessage('${c.message.id}')">
+				    <span class="luoicon-delete" title="删除"></span>
+				</a>
+				   <!--*modal*-->
+				   <div class="modal fade in" tabindex="-1" role="dialog"
+						id="msgModal_${c.message.id}" aria-labelledby="留言"
+						aria-describedby="留言" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">来自${c.personalProfile.realName!}HR的留言</h4>
+								</div>
+								<!--*modal body*-->
+								<div class="modal-body">
+								    <div class="padd-30-b">
+										<div class="form-group">
+											 <div class="col-sm-12 col-sm-offset-0">
+												<h4 class="modal-title">${c.message.content}</p>
+											 </div>
+										</div>
+		   						    </div>
+		    				    </div>
+							</div>
+						</div>
+					</div>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog"
+						id="leaveMsgModal_${c.message.id}" aria-labelledby="留言"
+						aria-describedby="留言" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">回复${c.personalProfile.realName!}的留言</h4>
+								</div>
+								<!--*modal body*-->
+								<form id="message_${c.message.id}" onsubmit="return leaveMsg(${c.message.id})" role="form" class="form-horizontal">
+								     <div class="modal-body">
+										  <div class="padd-40-b">
+											   <div class="form-group">
+												    <div class="col-sm-12 col-sm-offset-0">
+													     <textarea name="content" rows="5" class="form-control" placeholder="输入留言内容"></textarea>
+												    </div>
+												    <input name="targetUserId" type="hidden" value="${c.personalProfile.userId}">
+												    <input name="targetUserType" type="hidden" value="1">
+											   </div>
+										  </div>
+								     </div>
+								<!--*modal footer*-->
+	                                 <div class="modal-footer">  
+		                                  <button type="submit" class="btn btn-success">提交</button>
+	                                 </div>
+	                            </form>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		[/#list]
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+function leaveMsg(msgId){
+	PostForm('/rczp/message/leaveMsg.htm', "message_"+msgId, function(data) {
+		if (data.leaveMsgSuccess == true) {
+			alert("留言发送成功！");
+		}else{
+			alert("留言发送不成功！");
+		}
+	})
+	return false;
+}
+function viewMessage(messageId,isViewed) {
+	if(isViewed == 0){
+	AjaxPost('/rczp/message/viewMsg.htm',{messageId : messageId}, function(data){
+		if (data.viewSuccess == true) {
+			$("#isViewed_"+messageId).html('<span class="luoicon-remind"/>已读');
+		}
+	})
+	}
+}
+function delMessage(messageId) {
+	if(confirm("确认删除此条邀请？")){
+	AjaxPost('/rczp/message/delMsg.htm',{messageId : messageId, userType : 0}, function(data){
+		if (data.delSuccess == true) {
+			$("#msgList_" + messageId).addClass('hidden');
+			$("#my_msg_count").html(data.msgCount);
+		}
+	})
+	}
+}
+</script>

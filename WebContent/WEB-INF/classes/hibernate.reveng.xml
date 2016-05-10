@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="b_comp_centre" />
+	<table-filter match-name="b_comp_profile" />
+	<table-filter match-name="b_personal_centre" />
+	<table-filter match-name="b_personal_profile" />
+	<table-filter match-name="b_user_acount" />
+	<table-filter match-name="b_user_login" />
+	<table-filter match-name="c_invite" />
+	<table-filter match-name="c_leavemsg" />
+	<table-filter match-name="c_recruit" />
+	<table-filter match-name="c_recruit_collect" />
+	<table-filter match-name="c_resume" />
+	<table-filter match-name="c_resume_collect" />
+	<table-filter match-name="c_resume_receive" />
+	<table-filter match-name="c_user_log" />
+	<table-filter match-name="d_recruit_tag" />
+	<table-filter match-name="d_resume_tag" />
+	<table-filter match-name="d_dic" />
+	<table-filter match-name="d_function" />
+	<table-filter match-name="d_major" />
+	<table-filter match-name="d_province" />
+	<table-filter match-name="d_school" />
+	<table-filter match-name="d_trade" />
+	<table-filter match-name="s_admin_acount" />
+	<table-filter match-name="s_admin_log" />
+	<table-filter match-name="s_sys_msg" />
+</hibernate-reverse-engineering>

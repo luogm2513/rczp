@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+    xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	 <!-- 当前Spring支持注解 -->
+	 <context:annotation-config/>
+	 <!-- 设置当前项目的根包 -->
+	 <context:component-scan base-package="luo" />
+	 
+	<!-- 配置数据源 -->
+	<bean id="MySqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<!-- jdbc相关配置 -->
+		<property name="url" value="jdbc:mysql://localhost:3306/rczp?useUnicode=true&amp;characterEncoding=utf-8"></property>
+		<property name="username" value="luo"></property>
+		<property name="password" value="0107"></property>
+		<!-- 初始化链接大小 -->
+		<property name="initialSize" value="0" />
+		<!-- 连接池最大使用链接数量 -->
+		<property name="maxActive" value="50" />
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="20" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="0" />
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="60000" />
+		
+	</bean>
+	
+	<!-- 配置session工厂 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="MySqlDataSource" />
+		<!-- 配置连接池 开始 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+            <list>
+                <value>luo.rczp.core.model.UserAcount</value>
+                <value>luo.rczp.core.model.UserLogin</value>
+                <value>luo.rczp.core.model.PersonalProfile</value>
+                <value>luo.rczp.core.model.PersonalCentre</value>
+                <value>luo.rczp.core.model.CompProfile</value>
+                <value>luo.rczp.core.model.CompCentre</value>
+                <value>luo.rczp.colla.model.UserLog</value>
+                <value>luo.rczp.colla.model.Invite</value>
+                <value>luo.rczp.colla.model.Leavemsg</value>
+                <value>luo.rczp.colla.model.Recruit</value>
+                <value>luo.rczp.colla.model.RecruitCollect</value>
+                <value>luo.rczp.colla.model.Resume</value>                
+                <value>luo.rczp.colla.model.ResumeCollect</value>                
+                <value>luo.rczp.colla.model.ResumeReceive</value>                
+                <value>luo.rczp.colla.model.SysMsg</value>   
+                <value>luo.rczp.others.model.Area</value>
+                <value>luo.rczp.others.model.Function</value>
+                <value>luo.rczp.others.model.Trade</value>
+                <value>luo.rczp.others.model.RecruitTag</value>
+                <value>luo.rczp.others.model.ResumeTag</value>
+                <value>luo.rczp.others.model.School</value>
+                <value>luo.rczp.others.model.Province</value>
+                <value>luo.rczp.others.model.Major</value>
+                <value>luo.rczp.admin.model.AdminAcount</value>            
+                <value>luo.rczp.admin.model.AdminLog</value>                
+            </list>
+        </property>
+	</bean>
+	
+	<bean id="sessionProvider" class="luo.common.web.session.HttpSessionProvider">
+		<!-- <property name="sessionCache" ref="sessionCache"/>
+		<property name="sessionIdGenerator" ref="sessionIdGenerator"/> -->
+	</bean>
+	<!--Session缓存-->
+	<!-- <bean id="sessionCache" class="luo.common.web.session.cache.EhcacheSessionCache"/> -->	
+	<!--SessionId生成器,UUID-->
+	<!-- <bean id="sessionIdGenerator" class="luo.common.web.session.id.JdkUUIDGenerator"/> -->
+	
+	<!--密码加密器,采用MD5加密，将用户密码再加密后存入数据库-->
+	<bean id="pwdEncoder" class="luo.core.security.encoder.Md5PwdEncoder"/>
+	
+	<!-- 事务管理配置,将事务与Hibernate关联  -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 事务（注解 ） -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>

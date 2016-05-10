@@ -1,0 +1,15 @@
+<div class="clearfix">
+	<div class="bd-base-b clearfix">
+		<div class="pull-left">
+			<h3 class="marg-un-t">我的收藏</h3>
+		</div>
+	</div>
+	<div id="collectResume_list"></div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		AjaxLoad('/rczp/collect/getCollectResumeList.htm', null,
+				'collectResume_list', function() {
+				});
+	});
+</script>

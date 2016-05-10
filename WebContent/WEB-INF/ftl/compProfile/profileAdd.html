@@ -1,0 +1,120 @@
+<!--*企业基础信息修改页面*-->
+<div class="padd-30-b">
+	<h4 class="marg-un-t">企业基础信息</h4>
+	<form role="form" class="form-horizontal" action="/rczp/compExt/doProfileAdd.htm" method="post">
+		<div class="form-group">
+			<label class="col-sm-3 control-label">名称:</label>
+			<div class="col-sm-4">
+				<input name="compName" placeholder="公司名称" class="form-control" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司LOGO:</label>
+			<div class="col-sm-4">
+				<input name="compLogo" placeholder="公司LOGO" class="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">行业:</label>
+			<div class="col-sm-3">
+				<select name="parentTrade" id="parent_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="trade" id="son_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司性质:</label>
+			<div class="col-sm-3">
+				<select name="compType" class="form-control">
+					<option value="1">国企</option>
+					<option value="2">民营</option>
+					<option value="3">合资</option>
+					<option value="4">外企</option>
+					<option value="5">事业单位</option>
+					<option value="6">政府机关</option>
+					<option value="7">其他</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司规模:</label>
+			<div class="col-sm-3">
+				<select name="compScale" class="form-control">
+					<option value="1">7人以下</option>
+					<option value="2">7-20人</option>
+					<option value="3">21-50人</option>
+					<option value="4">51-200人</option>
+					<option value="5">201-1000人</option>
+					<option value="6">1000人以上</option>
+					<option value="7">其他</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司创建时间</label>
+			<div class="col-sm-3">
+				<select name="creatTime" class="form-control">
+					<option value="1">不到1年</option>
+					<option value="2">1-3年</option>
+					<option value="3">3-5年</option>
+					<option value="4">5-10年</option>
+					<option value="5">10-30年</option>
+					<option value="6">30年以上</option>
+					<option value="7">其他</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="area" class="col-sm-3 control-label">地区</label>
+			<div class="col-sm-3">
+				<select name="province" id="province_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="city" id="city_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="county" id="county_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">详细地址:</label>
+			<div class="col-sm-6">
+				<input name="address" id="inputAddress" placeholder="具体地址" class="form-control" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司官网</label>
+			<div class="col-sm-6">
+				<input name="compWebsite" id="inputCompWebsite" placeholder="公司官网" class="form-control" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">联系电话:</label>
+			<div class="col-sm-6">
+				<input type="tel" name="tel" id="inputTel" placeholder="联系电话" class="form-control" required />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">HR邮箱:</label>
+			<div class="col-sm-6">
+				<input type="email" name="email" id="inputEmail" placeholder="HR邮箱" class="form-control" required />
+			</div>
+		</div>
+		<div class="form-group col-sm-7">
+			<button style="margin-left: 100px" type="submit" class="btn btn-success btn-block" data-loading-text="正在提交...">提交</button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="../js/init.trade.js"></script>
+<script type="text/javascript" src="../js/init.area.js"></script>

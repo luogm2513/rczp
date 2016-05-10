@@ -1,0 +1,15 @@
+<!--*个人中心右边栏展示个人基础信息*-->
+<div id="pers_profileView"></div>
+<!-- *修改个人资料按钮* -->
+<button type="submit" value="修改" onclick="return editProfile()"></button>
+<script>
+	$(function() {
+		AjaxLoad('/rczp/persExt/getMyProfileView.htm', null,
+				'pers_profileView', function() {
+				});
+	})
+	function editProfile() {
+		AjaxGet('/rczp/persExt/getProfileEdit.htm', function() {
+		});
+	}
+</script>

@@ -1,0 +1,309 @@
+<div class="table-responsive padd-10-t">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>职位名称</th>
+				<th>标签</th>
+				<th>公司名称</th>
+				<th>发布日期</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			[#list recruitList as c] [#assign id=c.recruit.id/]
+			<tr id="recruit_${c.recruit.id}">
+				<td><a href="#recruitModal_${c.recruit.id}" onclick="viewRecruit('${c.recruit.id}')" data-toggle="modal">${c.functionName!}</a></td>
+				<td>[#list c.tags as tags] [#assign tag_id=tags.tagId/]
+				    <span class="label label-default">${tags.tagName!}</span>[/#list]
+				</td>
+				<td>
+				<a href="#profileModal_${c.recruit.id}" data-toggle="modal">${c.compProfile.compName!}</a>
+				</td>
+				<td>${c.recruit.postTime?string("yyyy-MM-dd")}</td>
+				<td>
+				<a href="#recruitModal_${c.recruit.id}" onclick="viewRecruit('${c.recruit.id}')" data-toggle="modal">
+					<span class="luoicon-check" title="查看"></span>
+				</a> 
+				<a href="#recruit_choose_${c.recruit.id}" data-toggle="modal" onclick="chooseResume('${c.recruit.id}')"> 
+					<span class="luoicon-apply" title="申请"></span>
+				</a>
+				<a href="#msgModal_${c.recruit.id}" data-toggle="modal">
+				    <span class="luoicon-message" title="发送留言"></span>
+				</a>
+				<a href="javascript:void(0);" onclick="collectRecruit('${c.recruit.id}')"> 
+				    <span class="luoicon-collect" title="收藏"></span>
+				</a>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog"
+						id="recruitModal_${c.recruit.id}" aria-labelledby="招聘1"
+						aria-describedby="招聘1" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title">${c.functionName!}</h4>
+								</div>
+								<!--*modal body*-->
+								<div class="modal-body">
+									<form role="form" class="form-horizontal">
+										<!--*招聘详情信息*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">招聘详情</h4>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">公司行业:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.recruitTradeName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">职位职能:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.functionName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">工作地点:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.jobAreaName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">需要人数:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.numRequire!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">工作经验:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.experience!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">工作类型:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.jobTypeName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">职位薪资:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.salary!}</p>
+												</div>
+											</div>
+											<div class="padd-30-b">
+												<h4 class="marg-un-t">工作介绍</h4>
+												<div class="form-group">
+													<div class="col-sm-11 col-sm-offset-1">
+														<p class="form-control-static">${c.recruit.discription!}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!--*modal footer*-->
+								<div class="modal-footer"></div>
+							</div>
+						</div>
+					</div>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog"
+						id="profileModal_${c.recruit.id}" aria-labelledby="招聘1"
+						aria-describedby="招聘1" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title">${c.compProfile.compName!}</h4>
+								</div>
+								<!--*modal body*-->
+								<div class="modal-body">
+									<form role="form" class="form-horizontal">
+										<!--*企业基础信息*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">企业基础信息</h4>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">名称:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.compProfile.compName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">公司LOGO:</label>
+												<div class="col-sm-9">
+													<div class="col-sm-11 col-sm-offset-1">
+														<img src="../images/org-logo_200x200.jpg"
+															class="img-40X40 img-rounded">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">行业:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.tradeName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">公司性质:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.compTypeName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">公司规模:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.compScale!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">公司创建时间</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.creatTime!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">地区</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.areaName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">详细地址:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.compProfile.address!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">公司官网</label>
+												<div class="col-sm-9">
+												    <a style="color:green" href="http://${c.compProfile.compWebsite!}" target="_blank">${c.compProfile.compWebsite!}</a>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">联系电话:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.compProfile.tel!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">HR邮箱:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.compProfile.email!}</p>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!--*modal footer*-->
+								<div class="modal-footer"></div>
+							</div>
+						</div>
+					</div>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog"
+						id="msgModal_${c.recruit.id}" aria-labelledby="留言"
+						aria-describedby="留言" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">给${c.compProfile.compName!}HR留言</h4>
+								</div>
+								<!--*modal body*-->
+								<form id="message_${c.recruit.id}" onsubmit="return leaveMsg(${c.recruit.id})" role="form" class="form-horizontal">
+								     <div class="modal-body">
+										  <div class="padd-40-b">
+											   <div class="form-group">
+												    <div class="col-sm-12 col-sm-offset-0">
+													     <textarea name="content" rows="5" class="form-control" placeholder="输入留言内容"></textarea>
+												    </div>
+												    <input name="targetUserId" type="hidden" value="${c.recruit.company.userId}">
+												    <input name="targetUserType" type="hidden" value="0">
+											   </div>
+										  </div>
+								     </div>
+								<!--*modal footer*-->
+	                                 <div class="modal-footer">  
+		                                  <button type="submit" class="btn btn-success">提交</button>
+	                                 </div>
+	                            </form>
+							</div>
+						</div>
+					</div>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog" id="recruit_choose_${c.recruit.id}" aria-labelledby="选择简历" aria-describedby="选择简历" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title">请选择一份你要投递的简历</h4>
+								</div>
+								<form id="chooseForm_${c.recruit.id}" action="/rczp/apply/doApply.htm" role="form" onsubmit="return apply(${c.recruit.id})">
+									<!--*modal body*-->
+									<div id="pers_resumeChoose_${c.recruit.id}" class="modal-body" />
+									<input name="recruitId" type="hidden" value="${c.recruit.id}">
+									<!--*modal footer*-->
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-success">提交简历</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			[/#list]
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	function chooseResume(recruitId) {
+		AjaxLoad('/rczp/resume/chooseResume.htm', null, 'pers_resumeChoose_'+recruitId,
+				function() {
+				});
+	}
+	function apply(recruitId) {
+		PostForm('/rczp/apply/doApply.htm', "chooseForm_"+recruitId, function(data) {
+			if (data.applySuccess == true) {
+				$("#my_apply_count").html(data.applyCount);
+				alert("职位申请成功！");
+			}else{
+				alert("职位申请不成功：您已经申请过该职位！");
+			}
+		})
+		return false;
+	}
+	function leaveMsg(recruitId){
+		PostForm('/rczp/message/leaveMsg.htm', "message_"+recruitId, function(data) {
+			if (data.leaveMsgSuccess == true) {
+				alert("留言发送成功！");
+			}else{
+				alert("留言发送不成功！");
+			}
+		})
+		return false;
+	}
+	function collectRecruit(recruitId) {
+		AjaxPost('/rczp/collect/collectRecruit.htm', {
+			recruitId : recruitId
+		}, function(data) {
+			if (data.collectSuccess == true) {
+				$("#my_collect_count").html(data.collectCount);
+				alert("职位收藏成功！您可以在我的收藏里查看详情！");
+			}else {
+				alert("职位收藏不成功！您已经收藏过该职位， 您可以在我的收藏里查看详情！");
+			}
+		})
+	}
+	function viewRecruit(recruitId) {
+		AjaxPost('/rczp/recruit/viewRecruit.htm',{recruitId : recruitId}, function(data){})
+	}
+</script>

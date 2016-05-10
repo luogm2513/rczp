@@ -1,0 +1,156 @@
+<!--*modal header*-->
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">&times;</button>
+	<h4 class="modal-title">招聘标题</h4>
+</div>
+<form role="form" action="/rczp/recruit/doRecruitAdd.htm" method="post" class="form-horizontal">
+	<!--*新增招聘信息*-->
+	<div>
+		<!--*企业基础信息修改页面*-->
+		<div id="comp_profileView"></div>
+		<!--*招聘详情信息*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">招聘详情</h4>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">公司行业:</label>
+				<div class="col-sm-3">
+					<select name="parentTrade" id="parent_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="trade" id="son_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">职位职能:</label>
+				<div class="col-sm-3">
+					<select name="grandFunction" id="first_id" class="form-control">
+							<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3">	
+					<select name="parentFunction" id="second_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3">	 
+					<select name="function" id="third_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作地点:</label>
+				<div class="col-sm-3">
+					<select name="province" id="province_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="city" id="city_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="county" id="county_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">需要人数:</label>
+				<div class="col-sm-3">
+					<select name="numRequire" class="form-control">
+						<option value="1">1人</option>
+						<option value="2">2-5人</option>
+						<option value="3">5-10人</option>
+						<option value="4">10-20人</option>
+						<option value="5">20人以上</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作经验:</label>
+				<div class="col-sm-3">
+					<select name="experience" class="form-control">
+						<option value="">不限</option>
+						<option value="1">不到1年</option>
+						<option value="2">1-3年</option>
+						<option value="3">3-5年</option>
+						<option value="4">5-10年</option>
+						<option value="5">10-30年</option>
+						<option value="6">30年以上</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作类型:</label>
+				<div class="col-sm-3">
+					<select name="jobType" class="form-control">
+						<option value="2">全职</option>
+						<option value="1">实习</option>
+						<option value="0">兼职</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">职位薪资:</label>
+				<div class="col-sm-3">
+					<select name="salary" class="form-control">
+						<option value="">面谈</option>
+						<option value="1">0-1499</option>
+						<option value="2">1500-1999</option>
+						<option value="3">2000-2999</option>
+						<option value="4">3000-3999</option>
+						<option value="5">4000-4999</option>
+						<option value="6">5000-6999</option>
+						<option value="7">7000-9999</option>
+						<option value="8">10000-14999</option>
+						<option value="9">15000-19999</option>
+						<option value="10">20000-29999</option>
+						<option value="11">30000+</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="tag1" class="col-sm-3 control-label">自定义标签1</label>
+				<div class="col-sm-6">
+					<input name="tag1" id="tag1" placeholder="输入自定义标签" class="form-control"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="tag2" class="col-sm-3 control-label">自定义标签2</label>
+				<div class="col-sm-6">
+					<input name="tag2" id="tag2" placeholder="输入自定义标签" class="form-control"/>
+				</div>
+			</div>
+			<div class="padd-30-b">
+				<h4 class="marg-un-t">工作介绍</h4>
+				<div class="form-group">
+					<div class="col-sm-11 col-sm-offset-1">
+						<textarea name="discription" rows="3" class="form-control" placeholder="简要介绍工作要求.."></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--*modal footer*-->
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success">提交</button>
+	</div>
+</form>
+<script type="text/javascript" src="../js/init.function.js"></script>
+<script type="text/javascript" src="../js/init.area.js"></script>
+<script type="text/javascript" src="../js/init.trade.js"></script>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script>
+	$(function() {
+		AjaxLoad('/rczp/compExt/getMyProfileView.htm', null,
+				'comp_profileView', function() {
+				});
+	})
+</script>

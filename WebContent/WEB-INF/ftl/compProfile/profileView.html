@@ -1,0 +1,80 @@
+<!--*企业基础信息修改页面*-->
+<div class="padd-30-b">
+	<h4 class="marg-un-t">企业基础信息</h4>
+	<form role="form" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-3 control-label">名称:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.compProfile.compName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司LOGO:</label>
+			<div class="col-sm-9">
+			    <div class="col-sm-11 col-sm-offset-1">
+				    <img src="../images/org-logo_200x200.jpg" class="img-40X40 img-rounded">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">行业:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.tradeName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司性质:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.compTypeName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司规模:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.compScale!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司创建时间</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.creatTime!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">地区</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.areaName!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">详细地址:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.compProfile.address!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">公司官网</label>
+			<div class="col-sm-9">
+				<a style="color:green" href="http://${map.compProfile.compWebsite!}" target="_blank">${map.compProfile.compWebsite!}</a>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">联系电话:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.compProfile.tel!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">HR邮箱:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">${map.compProfile.email!}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">审核结果:</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">[#if map.compProfile.isPassed gt 0]审核通过[#else]审核不通过[/#if]</p>
+			</div>
+		</div>
+	</form>
+</div>

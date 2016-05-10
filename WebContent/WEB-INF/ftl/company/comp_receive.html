@@ -1,0 +1,15 @@
+<div class="clearfix">
+	<div class="bd-base-b clearfix">
+		<div class="pull-left">
+			<h3 class="marg-un-t">接收到的简历</h3>
+		</div>
+	</div>
+	<div id="receiveResume_list"></div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		AjaxLoad('/rczp/apply/getApplyListByC.htm', null,
+				'receiveResume_list', function() {
+				});
+	});
+</script>

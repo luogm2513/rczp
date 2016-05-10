@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="http://v3.bootcss.com/docs-assets/ico/favicon.png">
+<meta name="description" content="luo-招聘">
+<meta name="author" content="Parox">
+<title>企业中心</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/parox-base.css" rel="stylesheet">
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<!--*left list*-->
+			<div class="col-md-3" >
+				<!--*log out*-->
+				<div class="clearfix">
+					<div>
+						<div class="pull-left">
+							<img src="../images/avater-user-200X200.jpg" class="img-rounded img-67X67">
+						</div>
+						<div class="pull-left padd-10-l">
+							<h4>${userData.userName!}<span class="luoicon-pass1" title="已通过认证"></span></h4>
+							<a href="/rczp/member/logout.htm">登出</a>
+						</div>
+					</div>
+				</div>
+
+				<!--job search-->
+				<div class="bgWhite bd-radius-3 marg-20-t">
+					<ul class="nav nav-pills nav-stacked">
+						<li id="my_resume" class="active"><a onClick="ShowResume()">简历搜索</a></li>
+					</ul>
+				</div>
+
+				<!--*personal info*-->
+				<div class="bgWhite bd-radius-3 marg-20-t">
+					<ul id="personal" class="nav nav-pills nav-stacked">
+						<li id="my_profile"><a onClick="ShowProfile()">基本资料
+						</a></li>
+						<li id="my_recruit"><a onClick="ShowRecruit()">我的招聘 <span
+								id="my_recruit_count" class="badge pull-right">${userData.recruitCount}</span>
+						</a></li>
+						<li id="my_receive"><a onClick="ShowReceive()">收到的简历 <span
+								id="my_apply_count" class="badge pull-right">${userData.receiveCount}</span>
+						</a></li>
+						<li id="my_record"><a onClick="ShowRecord()">操作记录 <span
+								id="my_invite_count" class="badge pull-right">${userData.inviteCount}</span>
+						</a></li>
+						<li id="my_collect"><a onClick="ShowCollect()">我的收藏 <span
+								id="my_collect_count" class="badge pull-right">${userData.collectCount}</span>
+						</a></li>
+						<li id="my_message"><a onClick="ShowMessage()">消息中心 <span
+								id="my_msg_count" class="badge pull-right">${userData.messageCount}</span>
+						</a></li>
+					</ul>
+				</div>
+
+				<!--*Christian zone*-->
+				<div class="marg-20-t bd-radius-3 bgWhite">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="/rczp/guide/getIndex4C.htm">基督徒专区</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!--*right content*-->
+			<div id="Comp_Right" class="col-md-9" ></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	//获取职位搜索右边栏
+	$(function() {
+		var code = ${userData.code};
+		if(code == 1){
+			$(function() {
+				DisActive()
+			});
+			$('#my_profile').addClass('active');
+		    AjaxLoad('/rczp/company/getProfile.htm', null, 'Comp_Right', function() {
+		    })
+		}else if(code == 2){
+			$(function() {
+				DisActive()
+			});
+			$('#my_recruit').addClass('active');
+		    AjaxLoad('/rczp/company/getRecruit.htm', null, 'Comp_Right', function() {
+		    })
+		}else{
+			AjaxLoad('/rczp/company/getResume.htm', null, 'Comp_Right', function() {
+			})
+		}
+	})
+	function ShowResume() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_resume').addClass('active');
+		AjaxLoad('/rczp/company/getResume.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function ShowProfile() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_profile').addClass('active');
+		AjaxLoad('/rczp/company/getProfile.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function ShowRecruit() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_recruit').addClass('active');
+		AjaxLoad('/rczp/company/getRecruit.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function ShowReceive() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_receive').addClass('active');
+		AjaxLoad('/rczp/company/getReceive.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function ShowRecord() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_record').addClass('active');
+		AjaxLoad('/rczp/company/getRecord.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function ShowCollect() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_collect').addClass('active');
+		AjaxLoad('/rczp/company/getCollect.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function ShowMessage() {
+		$(function() {
+			DisActive()
+		});
+		$('#my_message').addClass('active');
+		AjaxLoad('/rczp/company/getMessage.htm', null, 'Comp_Right', function() {
+		});
+	}
+	function DisActive() {
+		$('#my_recruit').removeClass('active');
+		$('#my_profile').removeClass('active');
+		$('#my_resume').removeClass('active');
+		$('#my_receive').removeClass('active');
+		$('#my_record').removeClass('active');
+		$('#my_collect').removeClass('active');
+		$('#my_message').removeClass('active');
+
+	}
+</script>
+</html>

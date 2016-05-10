@@ -1,0 +1,331 @@
+<div class="table-responsive padd-10-t">
+	<table class="table">
+		<thead>
+			<tr>
+			    <th>类型</th>
+				<th>对象</th>
+				<th>职位名称</th>
+				<th>邀请时间</th>
+				<th>状态</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			[#list resumeList as c] [#assign resume_id=c.resume.resumeId/]
+			<tr id="record_${c.record.id}">
+			    <td><a href="#inviteModal_${c.resume.resumeId}" data-toggle="modal">[#if c.record.inviteType gt 0]录取通知[#else]面试通知[/#if]</a></td>
+				<td><a href="#resumeModal_${c.resume.resumeId}" data-toggle="modal">${c.personalProfile.realName!}</a></td>
+				<td>${c.functionName!}</td>
+				<td>${c.record.sentTime?string("YYYY-MM-dd HH:mm")}</td>
+				<td>[#if c.record.isViewed gt 0]对方已查看[#else]对方未查看[/#if]
+				[#if c.record.isRefused gt 0]-被拒绝[/#if]</td>
+				<td>
+				<a href="#inviteModal_${c.resume.resumeId}" data-toggle="modal"> 
+				    <span class="luoicon-check" title="查看详情"></span>
+				</a> 
+				<a href="#msgModal_${c.resume.resumeId}" data-toggle="modal">
+				    <span class="luoicon-message" title="发送消息"></span>
+				</a>
+				<a href="javascript:void(0);" onclick="delInviteRecord('${c.record.id}')">
+				    <span class="luoicon-delete" title="删除邀请记录"></span> 
+				</a>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog" 
+					    id="resumeModal_${c.resume.resumeId}" aria-labelledby="简历1" aria-describedby="简历1"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title">${c.personalProfile.realName!}的简历</h4>
+								</div>
+								<!--*modal body*-->
+								<div class="modal-body">
+									<form role="form" class="form-horizontal">
+										<!--*个人基础信息*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">个人基础信息</h4>
+											<div class="form-group">
+												<label for="inputName" class="col-sm-3 control-label">姓名:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.personalProfile.realName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="sex" class="col-sm-3 control-label">性别:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">[#if c.personalProfile.gender gt 0]女[#else]男[/#if]</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">出生年月:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.personalProfile.birthday!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">婚姻状况:</label>
+												<div class="col-sm-9">
+													<P class="form-control-static">[#if c.personalProfile.marriage gt 0]已婚[#else]未婚[/#if]</P>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">户口所在地:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.NAreaName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">现居住城市:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.PAreaNames!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">详细地址:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.personalProfile.address!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">联系方式:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.personalProfile.mobile!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">邮件地址:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.personalProfile.email!}</p>
+												</div>
+											</div>
+										</div>
+										<!--*学历信息*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">学历信息</h4>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">毕业院校:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.provinceName!}-${c.schoolName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">主修专业:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.majorName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">学历:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.awardName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">语言能力:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.resume.language!}</p>
+												</div>
+											</div>
+										</div>
+										<!--*工作经历*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">工作经历</h4>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">学历:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.workYear!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">工作经历:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.resume.workExperience!}</p>
+												</div>
+											</div>
+										</div>
+										<!--*自我介绍*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">自我介绍</h4>
+											<div class="form-group">
+												<div class="col-sm-11 col-sm-offset-1">
+													<p class="form-control-static">${c.resume.selfIntroduction!}</p>
+												</div>
+											</div>
+										</div>
+										<!--*信仰经历*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">信仰经历</h4>
+											<div class="form-group">
+												<div class="col-sm-11 col-sm-offset-1">
+													<p class="form-control-static">${c.resume.faith!}</p>
+												</div>
+											</div>
+										</div>
+										<!--*个人照片*-->
+										<div class="padd-30-b">
+											<h4 class="marg-un-t">个人照片</h4>
+											<div class="form-group">
+												<div class="col-sm-11 col-sm-offset-1">
+													<img src="../images/org-logo_200x200.jpg" class="img-40X40 img-rounded">
+												</div>
+											</div>
+										</div>
+										<!--*求职意向*-->
+										<div>
+											<h4 class="marg-un-t">求职意向</h4>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">目标行业:</label>
+												<div class="col-sm-9">
+													<div class="btn-toolbar" role="toolbar">
+														<p class="form-control-static">${c.tradeName!}</p>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">目标职能:</label>
+												<div class="col-sm-9">
+													<div class="btn-toolbar" role="toolbar">
+														<p class="form-control-static">${c.functionName!}</p>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">目标城市:</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.targetAreaName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">工作类型:</label>
+												<div class="col-sm-9">
+													<div class="btn-toolbar" role="toolbar">
+														<p class="form-control-static">${c.jobTypeName!}</p>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">目标薪资:</label>
+												<div class="col-sm-9">
+													<div class="btn-toolbar" role="toolbar">
+														<p class="form-control-static">${c.targetSalary!}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!--*modal footer*-->
+								<div class="modal-footer">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog"
+						id="msgModal_${c.resume.resumeId}" aria-labelledby="留言"
+						aria-describedby="留言" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">给${c.personalProfile.realName!}留言</h4>
+								</div>
+								<!--*modal body*-->
+								<form id="message_${c.resume.resumeId}" onsubmit="return leaveMsg(${c.resume.resumeId})" role="form" class="form-horizontal">
+								     <div class="modal-body">
+										  <div class="padd-40-b">
+											   <div class="form-group">
+												    <div class="col-sm-12 col-sm-offset-0">
+													     <textarea name="content" rows="5" class="form-control" placeholder="输入留言内容"></textarea>
+												    </div>
+												    <input name="targetUserId" type="hidden" value="${c.resume.person.userId}">
+												    <input name="targetUserType" type="hidden" value="1">
+											   </div>
+										  </div>
+								     </div>
+								<!--*modal footer*-->
+	                                 <div class="modal-footer">  
+		                                  <button type="submit" class="btn btn-success">提交</button>
+	                                 </div>
+	                            </form>
+							</div>
+						</div>
+					</div>
+					<!--*modal*-->
+					<div class="modal fade in" tabindex="-1" role="dialog"
+						id="inviteModal_${c.resume.resumeId}" aria-labelledby="邀请详情"
+						aria-describedby="邀请详情" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!--*modal header*-->
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title">[#if c.record.inviteType gt 0]录取通知[#else]面试通知[/#if]</h4>
+								</div>
+								<!--*modal body*-->
+								<div class="modal-body">
+									<form role="form" class="form-horizontal">
+										<div class="padd-30-b">
+											<div class="form-group">
+												<label class="col-sm-3 control-label">[#if c.record.inviteType gt 0] 上岗时间:[#else] 面试时间 ：[/#if]</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.record.time?string("YYYY-MM-dd HH:mm")}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">[#if c.record.inviteType gt 0] 工作地点:[#else] 面试地点 ：[/#if]</label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.record.address!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">联系人员 : </label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.record.hrName!}</p>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">联系电话 : </label>
+												<div class="col-sm-9">
+													<p class="form-control-static">${c.record.tel!}</p>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			[/#list]
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+function delInviteRecord(recordId) {
+	if(confirm("确认删除此条邀请？")){
+		AjaxPost('/rczp/invite/delInviteByC.htm', {recordId : recordId}, function(data) {
+			if (data.delSuccess == true) {
+				$("#record_" + recordId).addClass('hidden');
+				$("#my_invite_count").html(data.inviteCount);
+			}
+		})
+	}
+}
+function leaveMsg(resumeId){
+	PostForm('/rczp/message/leaveMsg.htm', "message_"+resumeId, function(data) {
+		if (data.leaveMsgSuccess == true) {
+			alert("留言发送成功！");
+		}else{
+			alert("留言发送不成功！");
+		}
+	})
+	return false;
+}
+</script>

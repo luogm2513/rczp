@@ -1,0 +1,240 @@
+<!--*modal header*-->
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"
+		aria-hidden="true">&times;</button>
+	<h4 class="modal-title">新建简历</h4>
+</div>
+<form role="form" action="/rczp/resume/doResumeAdd.htm" method="post" class="form-horizontal">
+	<!--*新增个人简历*-->
+	<div>
+		<!--*个人基础信息修改页面*-->
+		<div id="pers_profileView"></div>
+		<!--*学历信息*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">学历信息</h4>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">毕业院校:</label>
+				<div class="col-sm-3">
+					<select id="province" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select id="school" name="school" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">主修专业:</label>
+				<div class="col-sm-3">
+					<select id="firstMajor_id" name="grandMajor" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select id="secondMajor_id" name="parentMajor" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select id="thirdMajor_id" name="major" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">学历:</label>
+				<div class="col-sm-3">
+					<select name="award" class="form-control">
+						<option value="0">初中</option>
+						<option value="1">高中/高职</option>
+						<option value="2">专科</option>
+						<option value="3">本科</option>
+						<option value="4">硕士</option>
+						<option value="5">博士</option>
+						<option value="6">海归</option>
+						<option value="7">其他</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">语言能力:</label>
+				<div class="col-sm-6">
+					<input name="language" type="text" class="form-control" placeholder="Language">
+				</div>
+			</div>
+		</div>
+		<!--*工作经历*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">工作经历</h4>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作时间:</label>
+				<div class="col-sm-3">
+					<select name="workYear" class="form-control">
+						<option value="1">不到1年</option>
+						<option value="2">1-3年</option>
+						<option value="3">3-5年</option>
+						<option value="4">5-10年</option>
+						<option value="5">10-30年</option>
+						<option value="6">30年以上</option>
+				    </select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作经历:</label>
+				<div class="col-sm-9">
+					<textarea name="workExperience" rows="3" class="form-control" placeholder="请填写你的工作经历..."></textarea>
+				</div>
+			</div>
+		</div>
+		<!--*自我介绍*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">自我介绍</h4>
+			<div class="form-group">
+				<div class="col-sm-11 col-sm-offset-1">
+					<textarea name="selfIntroduction" rows="3" class="form-control" placeholder="请做一下自我介绍"></textarea>
+				</div>
+			</div>
+		</div>
+		<!--*信仰经历*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">信仰经历</h4>
+			<div class="form-group">
+				<div class="col-sm-11 col-sm-offset-1">
+					<textarea name="faith" rows="3" class="form-control" placeholder="请填写你的信主过程..."></textarea>
+				</div>
+			</div>
+		</div>
+		<!--*个人照片*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">个人照片</h4>
+			<div class="form-group">
+				<div class="col-sm-11 col-sm-offset-1">
+					<input name="photo" type="file">
+				</div>
+			</div>
+		</div>
+		<!--*求职意向*-->
+		<div class="padd-30-b">
+			<h4 class="marg-un-t">求职意向</h4>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">目标行业:</label>
+				<div class="col-sm-3">
+					<select name="targetParentTrade" id="parent_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select name="targetTrade" id="son_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">目标职能:</label>
+				<div class="col-sm-3">
+					<select name="targetGrandFunction" id="first_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="targetParentFunction" id="second_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="targetFunction" id="third_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">目标城市:</label>
+				<div class="col-sm-3">
+					<select name="targetProvince" id="province_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="targetCity" id="city_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+				<div class="col-sm-3"> 
+					<select name="targetCounty" id="county_id" class="form-control">
+						<option value="">==请选择==</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">工作类型:</label>
+				<div class="col-sm-3">
+					<select name="jobType" class="form-control">
+						<option value="2">全职</option>
+						<option value="1">实习</option>
+						<option value="0">兼职</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">目标薪资:</label>
+				<div class="col-sm-3">
+					<select name="targetSalary" class="form-control">
+						<option value="">面谈</option>
+						<option value="1">0-1499</option>
+						<option value="2">1500-1999</option>
+						<option value="3">2000-2999</option>
+						<option value="4">3000-3999</option>
+						<option value="5">4000-4999</option>
+						<option value="6">5000-6999</option>
+						<option value="7">7000-9999</option>
+						<option value="8">10000-14999</option>
+						<option value="9">15000-19999</option>
+						<option value="10">20000-29999</option>
+						<option value="11">30000+</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="tag1" class="col-sm-3 control-label">自定义标签1</label>
+			<div class="col-sm-6">
+				<input name="tag1" id="tag1" placeholder="输入自定义标签" class="form-control"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="tag2" class="col-sm-3 control-label">自定义标签2</label>
+			<div class="col-sm-6">
+				<input name="tag2" id="tag2" placeholder="输入自定义标签" class="form-control"/>
+			</div>
+		</div>
+		<!--*是否发布*-->
+		<div class="form-group">
+ 		    <label class="col-sm-3 control-label">是否发布</label>
+			<div class="col-sm-6">
+				<div class="make-switch" data-on="info" data-off="success" data-on-label="YES" data-off-label="NO">
+                    <input type="checkbox" name="isPosted" value="1" checked>
+                </div>
+			</div>
+		</div>
+	</div>
+	<!--*modal footer*-->
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success">提交</button>
+	</div>
+</form>
+<script type="text/javascript" src="../js/init.function.js"></script>
+<script type="text/javascript" src="../js/init.major.js"></script>
+<script type="text/javascript" src="../js/init.area.js"></script>
+<script type="text/javascript" src="../js/init.school.js"></script>
+<script type="text/javascript" src="../js/init.trade.js"></script>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript" src="../js/bootstrap-switch.js"></script>
+<script>
+	$(function() {
+		AjaxLoad('/rczp/persExt/getMyProfileView.htm', null, 'pers_profileView',
+				function() {
+				});
+	})
+</script>

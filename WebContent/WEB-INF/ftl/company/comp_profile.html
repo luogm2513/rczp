@@ -1,0 +1,15 @@
+<!--*企业中心右边栏展示个人基础信息*-->
+<div id="comp_profileView"></div>
+<!-- *修改企业资料按钮* -->
+<button type="submit" value="修改" onclick="return editProfile()"></button>
+<script>
+	$(function() {
+		AjaxLoad('/rczp/compExt/getMyProfileView.htm', null, 'comp_profileView',
+				function() {
+				});
+	})
+	function editProfile() {
+		AjaxGet('/rczp/compExt/getProfileEdit.htm', function() {
+		});
+	}
+</script>

@@ -1,0 +1,15 @@
+<div class="clearfix">
+	<div class="bd-base-b clearfix">
+		<div class="pull-left">
+			<h3 class="marg-un-t">发送邀请记录</h3>
+		</div>
+	</div>
+	<div id="recordResume_list"></div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		AjaxLoad('/rczp/invite/getInviteListByC.htm', null,
+				'recordResume_list', function() {
+				});
+	});
+</script>

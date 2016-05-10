@@ -1,0 +1,96 @@
+<div class="clearfix">
+	<div class="bd-base-b">
+		<h3 class="marg-un-t">简历搜索</h3>
+	</div>
+	<form id="sform" class="form-horizontal marg-20-t" role="form" onsubmit= "return doResSearch()">
+		<div id="area" class="form-group">
+			<label for="area" class="control-label col-sm-1">地区</label>
+			<div class="col-sm-3">
+				<select name="province" id="province_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="city" id="city_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="county" id="county_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+		</div>
+		<div id="function" class="form-group">
+			<label for="function" class="control-label col-sm-1">职能</label>
+			<div class="col-sm-3">
+				<select name="grandFunction" id="first_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="parentFunction" id="second_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="function" id="third_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+		</div>
+		
+		<div id="industry" class="form-group">
+			<label for="industry" class="control-label col-sm-1">行业</label>
+			<div class="col-sm-3">
+				<select name="parentTrade" id="parent_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<select name="trade" id="son_id" class="form-control">
+					<option value="">==请选择==</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-1 col-sm-6">
+				<input id="keyword" name="keyword" value="" type="text" class="form-control" placeholder="请输入关键词">
+			</div>
+			<div class="col-sm-2">
+				<button type="submit" class="btn btn-default btn-block">搜索</button>
+			</div>
+			<div class="col-sm-3">
+				<ul class="list-unstyled list-inline font15">
+					<li><a href="/rczp/search/getResAdvSearch.htm">高级搜索</a></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div id="resume_list"></div>
+<script type="text/javascript" src="../js/init.trade.js"></script>
+<script type="text/javascript" src="../js/init.area.js"></script>
+<script type="text/javascript" src="../js/init.function.js"></script>
+<script type="text/javascript">
+$(function(){
+	AjaxLoad('/rczp/resume/getResumeList.htm', null,'resume_list', function(){
+	});
+})
+function doResSearch(){
+ 	AjaxLoad('/rczp/search/doResSearch.htm', {
+		province:document.getElementById("province_id").value,
+		city:document.getElementById("city_id").value,
+		county:document.getElementById("county_id").value,
+		city:document.getElementById("city_id").value,
+		gFunc:document.getElementById("first_id").value,
+		pFunc:document.getElementById("second_id").value,
+		func:document.getElementById("third_id").value,
+		pTrade:document.getElementById("parent_id").value,
+		trade:document.getElementById("son_id").value,
+		keyword:document.getElementById("keyword").value,
+	}, 'resume_list', function(){
+	})
+	return false;
+}
+</script>

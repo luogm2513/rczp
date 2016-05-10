@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="luo-招聘">
+<meta name="author" content="Parox">
+<title>简历搜索</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<script type="text/javascript" src="../js/init.trade.js"></script>
+<script type="text/javascript" src="../js/init.area.js"></script>
+<script type="text/javascript" src="../js/init.function.js"></script>
+<script type="text/javascript" src="../js/init.major.js"></script>
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/parox-base.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="clearfix">
+				<div class="bd-base-b">
+					<h3 class="marg-un-t">简历搜索</h3>
+				</div>
+				<form id="sform" class="form-horizontal marg-20-t" role="form" onsubmit="return doResSearch()">
+                    <div id="area" class="form-group">
+						<label for="area" class="control-label col-sm-2">目标地点</label>
+						<div class="col-sm-3">
+							<select name="province" id="province_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select name="city" id="city_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select name="county" id="county_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+					</div>
+					
+					<div id="function" class="form-group">
+						<label for="function" class="control-label col-sm-2">目标职位</label>
+						<div class="col-sm-3">
+							<select name="grandFunction" id="first_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select name="parentFunction" id="second_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select name="function" id="third_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+					</div>
+
+					<div id="industry" class="form-group">
+						<label for="industry" class="control-label col-sm-2">目标行业</label>
+						<div class="col-sm-3">
+							<select name="parentTrade" id="parent_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<select name="trade" id="son_id" class="form-control">
+								<option value="">==请选择==</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+				        <label for="award" class="col-sm-2 control-label">学历要求</label>
+				        <div class="col-sm-3">
+							<select name="award" id="award" class="form-control">
+								<option value="">不限</option>
+								<option value="0">初中</option>
+								<option value="1">高中/高职</option>
+								<option value="2">专科</option>
+								<option value="3">本科</option>
+								<option value="4">硕士</option>
+								<option value="5">博士</option>
+								<option value="6">海归</option>
+							</select>
+				        </div>
+				        <label for="workYear" class="col-sm-2 control-label">工作经验</label>
+				        <div class="col-sm-3">
+							<select name="workYear" id="workYear" class="form-control">
+							    <option value="">不限</option>
+								<option value="1">不到1年</option>
+								<option value="2">1-3年</option>
+								<option value="3">3-5年</option>
+								<option value="4">5-10年</option>
+								<option value="5">10-30年</option>
+								<option value="6">30年以上</option>
+							</select>
+				        </div>
+			        </div>
+			        <div class="form-group">
+						<div class="col-sm-offset-1 col-sm-6">
+							<input name="keyword" id="keyword" type="text" class="form-control" placeholder="请输入关键词">
+						</div>
+						<div class="col-sm-2">
+							<button type="submit" class="btn btn-default btn-block">搜索</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="resume_list"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(function(){
+	AjaxLoad('/rczp/resume/getResList4comp.htm', null, 'resume_list', function(){
+	});
+})
+function doResSearch() {
+ 	AjaxLoad('/rczp/search/doResSearch.htm', {
+		province:document.getElementById("province_id").value,
+		city:document.getElementById("city_id").value,
+		county:document.getElementById("county_id").value,
+		city:document.getElementById("city_id").value,
+		gFunc:document.getElementById("first_id").value,
+		pFunc:document.getElementById("second_id").value,
+		func:document.getElementById("third_id").value,
+		pTrade:document.getElementById("parent_id").value,
+		trade:document.getElementById("son_id").value,
+		award:document.getElementById("award").value,
+		workYear:document.getElementById("workYear").value,
+		keyword:document.getElementById("keyword").value,
+	}, 'resume_list', function(){
+	})
+	return false;
+}
+</script>
+</html>

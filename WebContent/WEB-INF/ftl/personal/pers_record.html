@@ -1,0 +1,15 @@
+<div class="clearfix">
+	<div class="bd-base-b clearfix">
+		<div class="pull-left">
+			<h3 class="marg-un-t">申请职位记录</h3>
+		</div>
+	</div>
+	<div id="recordRecruit_list"></div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		AjaxLoad('/rczp/apply/getApplyListByP.htm', null,
+				'recordRecruit_list', function() {
+				});
+	});
+</script>
